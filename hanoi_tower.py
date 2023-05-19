@@ -47,7 +47,7 @@ class Node:
 
 
 if __name__ == '__main__':
-    n = 15
+    n = 10
     tower_value = [item for item in range(1, n + 1)]
     tower_value.reverse()
     tower_a = Tower(tower_value, name='tower_a')
@@ -61,5 +61,6 @@ if __name__ == '__main__':
         node_prev = node
 
     print(tower_a)
-    node.execute(tower_a, tower_c, tower_b)
+    if node:
+        node.execute(tower_a, tower_c, tower_b)
     print(tower_c)

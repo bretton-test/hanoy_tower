@@ -10,8 +10,10 @@ class Node:
 class Worker:
     def __init__(self, level):
         node1 = Node((level, 'start', 'end', 'buffer'))
-        self.__code = Node((0, 'start', 'start', 'buffer'), node1)
-        self.__create_code()
+        self.__code = None
+        if level > 0:
+            self.__code = Node((0, 'start', 'start', 'buffer'), node1)
+            self.__create_code()
 
     def __create_code(self):
         code_item = self.__code
@@ -47,7 +49,7 @@ class Worker:
 
 
 if __name__ == '__main__':
-    n = 15
+    n = 10
     tower_value = [item for item in range(1, n + 1)]
     tower_value.reverse()
     tower_a = Tower(tower_value, name='tower_a')
