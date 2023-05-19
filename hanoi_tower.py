@@ -36,20 +36,18 @@ class Node:
         self.next_item = next_item
 
     @staticmethod
-    def move_1(start, end):
+    def __move_1(start, end):
         end.push(start.pop())
 
     def execute(self, start, end, buffer):
-        self.move_1(start, end) if self.level <= 1 else self.next_item.execute(start, end, buffer)
+        self.__move_1(start, buffer) if self.level <= 1 else self.next_item.execute(start, buffer, end)
         if self.level > 0:
-            self.move_1(start, buffer)
-            self.move_1(end, start) if self.level == 1 else self.next_item.execute(end, start, buffer)
-            self.move_1(buffer, end)
-            self.move_1(start, end) if self.level == 1 else self.next_item.execute(start, end, buffer)
+            self.__move_1(start, end)
+        self.__move_1(buffer, end) if self.level <= 1 else self.next_item.execute(buffer, end, start)
 
 
 if __name__ == '__main__':
-    n = 9
+    n = 15
     tower_value = [item for item in range(1, n + 1)]
     tower_value.reverse()
     tower_a = Tower(tower_value, name='tower_a')
